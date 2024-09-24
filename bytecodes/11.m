@@ -2,8 +2,9 @@ push 1
 push 2
 push 3
 pall
-mul
+mod
 pall
-mul
+push 0
+mod
 pall
-mul
+mod
