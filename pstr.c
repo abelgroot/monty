@@ -10,9 +10,9 @@
  */
 void pstr(stack_t **stack, unsigned int line_number)
 {
+	int value;
 	stack_t *current = *stack;
 	(void)line_number; /* Unused */
-	int value;
 
 	while (current != NULL)
 	{
