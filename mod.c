@@ -1,6 +1,6 @@
 #include "monty.h"
 /**
-* my_div - modulo the top two elements of the stack.
+* mod - modulo the top two elements of the stack.
 * @stack: Double pointer to the stack.
 * @line_number: The line number in the bytecode file.
 */

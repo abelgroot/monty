@@ -1,6 +1,6 @@
 #include "monty.h"
 /**
-* add - subtract the top two elements of the stack.
+* sub - subtract the top two elements of the stack.
 * @stack: Double pointer to the stack.
 * @line_number: The line number in the bytecode file.
 */
