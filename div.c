@@ -1,10 +1,10 @@
 #include "monty.h"
 /**
-* div - divide the top two elements of the stack.
+* my_div - divide the top two elements of the stack.
 * @stack: Double pointer to the stack.
 * @line_number: The line number in the bytecode file.
 */
-void div(stack_t **stack, unsigned int line_number)
+void my_div(stack_t **stack, unsigned int line_number)
 {
 	stack_t *first;
 	stack_t *second;
