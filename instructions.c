@@ -10,15 +10,17 @@
  * If no valid integer is given, the function exits with an error.
  */
 void push(stack_t **stack, unsigned int line_number)
-{
+{	
+	stack_t *new_node = NULL;
+
 	char *arg = strtok(NULL, " \t\n");
-  if (arg == NULL || !isdigit(arg[0]) && arg[0] != '-')
+	if (arg == NULL || (!isdigit(arg[0]) && arg[0] != '-'))
   {
     fprintf(stderr, "L%u: usage: push integer\n", line_number);
     exit(EXIT_FAILURE);
   }
 
-  stack_t *new_node = safe_malloc(sizeof(stack_t));
+  new_node = safe_malloc(sizeof(stack_t));
   new_node->n = atoi(arg);
   new_node->next = *stack;
   new_node->prev = NULL;

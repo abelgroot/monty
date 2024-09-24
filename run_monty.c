@@ -41,7 +41,8 @@ void run_monty(FILE *file)
 	unsigned int line_number = 0;
 	stack_t *stack = NULL;
  
-	while (getline(&line, &len, file) != -1)
+
+	while (fgets(line, sizeof(line), file) != NULL)
 	{
 		line_number++;
 		char *opcode = strtok(line, " \t\n");
