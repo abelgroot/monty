@@ -9,11 +9,12 @@ void run_monty(FILE *file)
 	char line[256]; /* Static buffer for line */
 	unsigned int line_number = 0;
 	stack_t *stack = NULL;
+	char *opcode;
 
 	while (fgets(line, sizeof(line), file) != NULL)
 	{
 		line_number++;
-		char *opcode = strtok(line, " \t\n");
+		opcode = strtok(line, " \t\n");
 
 		/* Skip empty lines or comments */
 		if (opcode == NULL || opcode[0] == '#')
