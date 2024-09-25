@@ -1,4 +1,5 @@
 #include "monty.h"
+#include <stdio.h>
 
 /**
  * execute - Executes the given opcode.
@@ -39,7 +40,7 @@ void run_monty(FILE *file)
 	size_t len = 0;
 	unsigned int line_number = 0;
 	stack_t *stack = NULL;
-
+ 
 	while (getline(&line, &len, file) != -1)
 	{
 		line_number++;
