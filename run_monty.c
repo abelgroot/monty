@@ -6,7 +6,7 @@
  */
 void run_monty(FILE *file)
 {
-	char line[256]; /* Static buffer for line */
+	char line[2560]; /* Static buffer for line */
 	unsigned int line_number = 0;
 	stack_t *stack = NULL;
 	char *opcode;
