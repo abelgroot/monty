@@ -38,7 +38,7 @@ typedef struct instruction_s
 
 /* Function Prototypes */
 void execute(char *opcode, stack_t **stack, unsigned int line_number);
-void push(stack_t **stack, unsigned int line_number, char *arg);
+void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
 void free_stack(stack_t *stack);
 void run_monty(FILE *file);
