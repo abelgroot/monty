@@ -1,19 +1,15 @@
 #include "monty.h"
 
 /**
- * main - Monty bytecode interpreter entry point.
- * @argc: argument count.
- * @argv: argument vector, where argv[1] is the Monty bytecode file.
+ * main - Entry point of the Monty interpreter.
+ * @argc: Argument count.
+ * @argv: Argument vector.
  *
- * Return: 0 on success, or EXIT_FAILURE on error.
+ * Return: EXIT_SUCCESS or EXIT_FAILURE.
  */
 int main(int argc, char *argv[])
 {
 	FILE *file;
-	char line[1024];  /* Fixed buffer size for reading lines */
-	char *opcode, *arg;
-	unsigned int line_number = 0;
-	stack_t *stack = NULL;
 
 	if (argc != 2)
 	{
@@ -22,27 +18,14 @@ int main(int argc, char *argv[])
 	}
 
 	file = fopen(argv[1], "r");
-	if (!file)
+	if (file == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
 
-	/* Reading the file line by line */
-	while (fgets(line, sizeof(line), file) != NULL)
-	{
-		line_number++;
-		opcode = strtok(line, " \n");
-		arg = strtok(NULL, " \n");
+	run_monty(file);
 
-		if (opcode && strcmp(opcode, "push") == 0)
-			push(&stack, line_number, arg);
-		else if (opcode && strcmp(opcode, "pall") == 0)
-			pall(&stack, line_number);
-	}
-
-	free_stack(stack);
 	fclose(file);
-
-	return (0);
+	return (EXIT_SUCCESS);
 }
