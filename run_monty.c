@@ -1,5 +1,4 @@
 #include "monty.h"
-#include <stdio.h>
 
 /**
  * run_monty - Executes the bytecode from a file.
@@ -7,13 +6,12 @@
  */
 void run_monty(FILE *file)
 {
-	char *line; /* Static buffer for line */
+	char line[256]; /* Static buffer for line */
 	unsigned int line_number = 0;
 	stack_t *stack = NULL;
 	char *opcode;
-	size_t *buffer;
 
-	while (getline(&line, &buffer, file) != -1)
+	while (fgets(line, sizeof(line), file) != NULL)
 	{
 		line_number++;
 		opcode = strtok(line, " \t\n");
@@ -42,10 +40,8 @@ void execute(char *opcode, stack_t **stack, unsigned int line_number)
 		{"pint", pint},
 		{NULL, NULL}
 	};
-	
-	int i;
 
-	for ( i = 0; instructions[i].opcode != NULL; i++)
+	for (int i = 0; instructions[i].opcode != NULL; i++)
 	{
 		if (strcmp(opcode, instructions[i].opcode) == 0)
 		{
