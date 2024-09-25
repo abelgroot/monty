@@ -1,34 +1,4 @@
 #include "monty.h"
-#include <stdio.h>
-
-/**
- * execute - Executes the given opcode.
- * @opcode: The opcode to execute.
- * @stack: Double pointer to the stack.
- * @line_number: The line number in the bytecode file.
- */
-void execute(char *opcode, stack_t **stack, unsigned int line_number)
-{
-    instruction_t instructions[] = {
-        {"push", push},
-        {"pall", pall},
-        {NULL, NULL}
-    };
-    
-    int i = 0;
-    while (instructions[i].opcode != NULL)
-    {
-        if (strcmp(opcode, instructions[i].opcode) == 0)
-        {
-            instructions[i].f(stack, line_number);
-            return;
-        }
-        i++;
-    }
-
-    fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
-    exit(EXIT_FAILURE);
-}
 
 /**
  * run_monty - Executes the bytecode from a file.
@@ -36,23 +6,49 @@ void execute(char *opcode, stack_t **stack, unsigned int line_number)
  */
 void run_monty(FILE *file)
 {
-	char *line = NULL;
-	size_t len = 0;
+	char line[256]; /* Static buffer for line */
 	unsigned int line_number = 0;
 	stack_t *stack = NULL;
- 
 
 	while (fgets(line, sizeof(line), file) != NULL)
 	{
 		line_number++;
 		char *opcode = strtok(line, " \t\n");
 
+		/* Skip empty lines or comments */
 		if (opcode == NULL || opcode[0] == '#')
 			continue;
 
-		execute(opcode, &stack, line_number);
+		execute(opcode, &stack, line_number); /* Execute the opcode */
 	}
 
-	free(line);
-	free_stack(stack);
+	free_stack(stack); /* Free the entire stack before exiting */
+}
+
+/**
+ * execute - Executes the opcode.
+ * @opcode: The opcode to execute.
+ * @stack: Double pointer to the stack.
+ * @line_number: The line number in the bytecode file.
+ */
+void execute(char *opcode, stack_t **stack, unsigned int line_number)
+{
+	instruction_t instructions[] = {
+		{"push", push},
+		{"pall", pall},
+		{"pint", pint},
+		{NULL, NULL}
+	};
+
+	for (int i = 0; instructions[i].opcode != NULL; i++)
+	{
+		if (strcmp(opcode, instructions[i].opcode) == 0)
+		{
+			instructions[i].f(stack, line_number);
+			return;
+		}
+	}
+
+	fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
+	exit(EXIT_FAILURE);
 }

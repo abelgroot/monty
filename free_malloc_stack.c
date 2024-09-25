@@ -1,23 +1,21 @@
 #include "monty.h"
 
 /**
- * free_stack - frees a doubly linked list (stack).
- * @stack: pointer to the head of the stack.
- *
- * Description: The function traverses the stack and frees each node.
+ * free_stack - Frees the stack.
+ * @stack: Pointer to the stack.
  */
 void free_stack(stack_t *stack)
 {
-	stack_t *current;
+	stack_t *current = stack;
+	stack_t *next;
 
-	while (stack)
+	while (current != NULL)
 	{
-		current = stack;
-		stack = stack->next;
+		next = current->next;
 		free(current);
+		current = next;
 	}
 }
-
 
 /**
  * safe_malloc - Wrapper for malloc to check for allocation failure.
@@ -27,11 +25,11 @@ void free_stack(stack_t *stack)
  */
 void *safe_malloc(size_t size)
 {
-    void *ptr = malloc(size);
-    if (ptr == NULL)
-    {
-        fprintf(stderr, "Error: malloc failed\n");
-        exit(EXIT_FAILURE);
-    }
-    return ptr;
+	void *ptr = malloc(size);
+	if (ptr == NULL)
+	{
+		fprintf(stderr, "Error: malloc failed\n");
+		exit(EXIT_FAILURE);
+	}
+	return ptr;
 }
