@@ -10,8 +10,8 @@
 int main(int argc, char *argv[])
 {
 	FILE *file;
-	char *line = NULL, *opcode, *arg;
-	size_t len = 0;
+	char line[1024];  /* Fixed buffer size for reading lines */
+	char *opcode, *arg;
 	unsigned int line_number = 0;
 	stack_t *stack = NULL;
 
@@ -28,7 +28,8 @@ int main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 
-	while (getline(&line, &len, file) != -1)
+	/* Reading the file line by line */
+	while (fgets(line, sizeof(line), file) != NULL)
 	{
 		line_number++;
 		opcode = strtok(line, " \n");
@@ -40,7 +41,6 @@ int main(int argc, char *argv[])
 			pall(&stack, line_number);
 	}
 
-	free(line);
 	free_stack(stack);
 	fclose(file);
 
