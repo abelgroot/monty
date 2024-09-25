@@ -41,7 +41,9 @@ void execute(char *opcode, stack_t **stack, unsigned int line_number)
 		{NULL, NULL}
 	};
 
-	for (int i = 0; instructions[i].opcode != NULL; i++)
+	int i;
+
+	for (i = 0; instructions[i].opcode != NULL; i++)
 	{
 		if (strcmp(opcode, instructions[i].opcode) == 0)
 		{
