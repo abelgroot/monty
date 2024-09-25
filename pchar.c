@@ -10,6 +10,8 @@
  */
 void pchar(stack_t **stack, unsigned int line_number)
 {
+	int value;
+
 	if (*stack == NULL)
 	{
 		fprintf(stderr, "L%u: can't pchar, stack empty\n", line_number);
@@ -17,7 +19,7 @@ void pchar(stack_t **stack, unsigned int line_number)
 	}
 
 	/* Get the integer value at the top of the stack */
-	int value = (*stack)->n;
+	value = (*stack)->n;
 
 	/* Check if the value is a valid ASCII character */
 	if (value < 0 || value > 127)
