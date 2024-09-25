@@ -7,6 +7,8 @@
  *
  * Return: EXIT_SUCCESS or EXIT_FAILURE.
  */
+int mode = 0;
+
 int main(int argc, char *argv[])
 {
 	FILE *file;

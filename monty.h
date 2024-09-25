@@ -6,6 +6,7 @@
 #include <string.h>
 #include <ctype.h>
 
+
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -58,5 +59,12 @@ void rotr(stack_t **stack, unsigned int line_number);
 void free_stack(stack_t *stack);
 void run_monty(FILE *file);
 void *safe_malloc(size_t size);
+
+
+/* Global variable for mode: 0 for stack (LIFO), 1 for queue (FIFO) */
+extern int mode;
+
+void stack_mode(stack_t **stack, unsigned int line_number);
+void queue_mode(stack_t **stack, unsigned int line_number);
 
 #endif /* MONTY_H */
