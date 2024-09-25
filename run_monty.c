@@ -46,7 +46,6 @@ void execute(char *opcode, stack_t **stack, unsigned int line_number)
 		{"div", my_div},
 		{"mul", mul},
 		{"mod", mod},
-		{"pchar", pchar},
 		{NULL, NULL}
 	};
 
