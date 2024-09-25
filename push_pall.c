@@ -10,6 +10,7 @@ void push(stack_t **stack, unsigned int line_number)
 	stack_t *new_node;
 
 	char *arg = strtok(NULL, " \t\n");
+
 	if (arg == NULL || (!isdigit(arg[0]) && arg[0] != '-'))
 	{
 		fprintf(stderr, "L%u: usage: push integer\n", line_number);
@@ -40,19 +41,4 @@ void pall(stack_t **stack, unsigned int line_number)
 		printf("%d\n", current->n);
 		current = current->next;
 	}
-}
-
-/**
- * pint - Prints the top value of the stack.
- * @stack: Double pointer to the stack.
- * @line_number: The line number in the bytecode file.
- */
-void pint(stack_t **stack, unsigned int line_number)
-{
-	if (*stack == NULL)
-	{
-		fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
-		exit(EXIT_FAILURE);
-	}
-	printf("%d\n", (*stack)->n);
 }
