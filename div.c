@@ -1,10 +1,10 @@
 #include "monty.h"
 /**
-* add - subtract the top two elements of the stack.
+* div - divide the top two elements of the stack.
 * @stack: Double pointer to the stack.
 * @line_number: The line number in the bytecode file.
 */
-void sub(stack_t **stack, unsigned int line_number)
+void div(stack_t **stack, unsigned int line_number)
 {
 	stack_t *first;
 	stack_t *second;
@@ -18,6 +18,11 @@ void sub(stack_t **stack, unsigned int line_number)
 	first = *stack;
 	second = first->next;
 
-	second->n -= first->n; /* subtract top two elements */
+	if (first->n == 0)
+	{
+		fprintf(stderr, "L%d: division by zero\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	second->n /= first->n; /* divide top two elements */
 	pop(stack, line_number); /* Pop the top element */
 }
